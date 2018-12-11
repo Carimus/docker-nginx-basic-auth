@@ -19,6 +19,7 @@ Try accessing and logging in with username `foo` and password `bar` at
 docker run --init \
            -e HTPASSWD='foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.' \
            -e ROOT_PATH=/srv/www \
+           -e SPA=true \
            -p 8080:80 \
            -v "$(pwd):/srv/www" \
            carimus/nginx-basic-auth
@@ -32,6 +33,10 @@ docker run --init \
    `auth.htpasswd` file on launch (non-persistent)
  - `ROOT_PATH` (default: `/var/www/html`): Absolute path to the directory to serve as the root of
    the server.
+ - `SPA` (default: `false`): Set to exactly `true` if you want to have all paths that don't resolve
+   to a file, resolve to `index.html`.
+   [See this article](https://medium.com/yld-engineering-blog/deploy-your-create-react-app-with-docker-and-ngnix-653e94ffb537)
+   for one of many explanations.
 
 ## Multiple Users
 
